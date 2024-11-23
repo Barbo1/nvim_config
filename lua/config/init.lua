@@ -1,7 +1,9 @@
+-- Is necessary for the images in neo-tree to download ImageMagick 7 or above, and 
+-- download the JetBrains nerd fonts and put them in .local/share/fonts.
 
 ------- options -------
 
-vim.opt.tabstop = 2  
+vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.g.mapleader = ' '
@@ -42,7 +44,8 @@ vim.keymap.set ('n', '<leader>cls', function ()
     "    bool operator== (const Name &);",
     "    ~Name ();",
     "    ",
-    "};"})
+    "};"
+  })
   vim.ui.input ({prompt = "Class name: "}, function (prompt)
     prompt = string.gsub (prompt, " ", "")
     if prompt ~= "" then
@@ -52,5 +55,83 @@ vim.keymap.set ('n', '<leader>cls', function ()
   vim.cmd ("nohlsearch")
 end)
 
-return {}
+-- git commands --
 
+vim.api.nvim_create_user_command(
+  "Grac",
+  function ()
+    vim.fn.system({"git", "add", vim.fn.expand("%")})
+    vim.fn.system({"git", "rebase", "--continue"})
+    print("Rebase continued.")
+  end,
+  {}
+)
+
+vim.api.nvim_create_user_command(
+  "Ga",
+  function ()
+    vim.fn.system({"git", "add", vim.fn.expand("%")})
+    vim.cmd("redraw!")
+    print("Added this file.")
+  end,
+  {}
+)
+
+vim.api.nvim_create_user_command (
+  "Gcp",
+  function (args)
+    local name = args.fargs[1]
+    if name then
+      print(vim.fn.system({"git", "commit", "-m", name}))
+      print(vim.fn.system({"git", "push"}))
+      vim.cmd("redraw!")
+      print("Commited and pushed.")
+    else
+      print("No commit name introduced.")
+    end
+  end,
+  {nargs = 1}
+)
+
+vim.api.nvim_create_user_command(
+  "Gc",
+  function (args)
+    vim.fn.system({"git", "commit", "-m", args.fargs[1]})
+    vim.cmd("redraw!")
+    print("Commited.")
+  end,
+  {}
+)
+
+vim.api.nvim_create_user_command(
+  "Gp",
+  function ()
+    vim.fn.system({"git", "push"})
+    vim.cmd("redraw!")
+    print("Pushed.")
+  end,
+  {}
+)
+
+vim.api.nvim_create_user_command(
+  "Gpf",
+  function ()
+    vim.fn.system({"git", "push", "--force-if-includes", "--force-with-lease"})
+    vim.cmd("redraw!")
+    print("Pushed.")
+  end,
+  {}
+)
+
+vim.api.nvim_create_user_command(
+  "Gs",
+  function ()
+    local status_info = vim.fn.system({"git", "status"})
+    vim.api.nvim_out_write(status_info)
+  end,
+  {}
+)
+
+------- -------
+
+return {}
