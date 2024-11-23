@@ -33,20 +33,15 @@ require("lazy").setup({
   {
     'VonHeikemen/lsp-zero.nvim',
     dependencies = {
-      -- LSP Support
       {'neovim/nvim-lspconfig'},
       {'williamboman/mason.nvim'},
       {'williamboman/mason-lspconfig.nvim'},
-
-      -- Autocompletion
       {'hrsh7th/nvim-cmp'},
       {'hrsh7th/cmp-buffer'},
       {'hrsh7th/cmp-path'},
       {'saadparwaiz1/cmp_luasnip'},
       {'hrsh7th/cmp-nvim-lsp'},
       {'hrsh7th/cmp-nvim-lua'},
-
-      -- Snippets
       {'L3MON4D3/LuaSnip'},
       {'rafamadriz/friendly-snippets'},
     }
@@ -56,7 +51,7 @@ require("lazy").setup({
     branch = "v3.x",
     dependencies = {
       {"nvim-lua/plenary.nvim"},
-      {"nvim-tree/nvim-web-devicons"}, -- not strictly required, but recommended
+      {"nvim-tree/nvim-web-devicons"},
       {"MunifTanjim/nui.nvim"},
       {"3rd/image.nvim"}
     },
@@ -71,12 +66,12 @@ require("lazy").setup({
         {text = "󰌵", texthl = "DiagnosticSignHint"})
 
       require("neo-tree").setup({
-        close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
+        close_if_last_window = false,
         popup_border_style = "rounded",
         enable_git_status = true,
         enable_diagnostics = true,
         use_libuv_file_watcher = true,
-        open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
+        open_files_do_not_replace_types = { "terminal", "trouble", "qf" },
         sort_case_insensitive = false, -- used when sorting files and directories in the tree
         sort_function = nil , -- use a custom function for sorting files and directories in the tree 
         default_component_configs = {
