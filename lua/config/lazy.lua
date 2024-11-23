@@ -19,6 +19,12 @@ require("lazy").setup({
     dependencies = { 'nvim-lua/plenary.nvim' }
   },
   {
+    "ellisonleao/gruvbox.nvim",
+    priority = 1000 ,
+    config = true,
+    opts = ...
+  },
+  {
     'rose-pine/neovim',
     name = 'rose-pine',
     config = function()
