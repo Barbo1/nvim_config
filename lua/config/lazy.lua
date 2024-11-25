@@ -19,6 +19,64 @@ require("lazy").setup({
     dependencies = { 'nvim-lua/plenary.nvim' }
   },
   {
+    'theprimeagen/harpoon',
+    branch = "harpoon2",
+    opts = {
+      global_settings = {
+        -- sets the marks upon calling `toggle` on the ui, instead of require `:w`.
+        save_on_toggle = false,
+
+        -- saves the harpoon file upon every change. disabling is unrecommended.
+        save_on_change = true,
+
+        -- sets harpoon to run the command immediately as it's passed to the terminal when calling `sendCommand`.
+        enter_on_sendcmd = false,
+
+        -- closes any tmux windows harpoon that harpoon creates when you close Neovim.
+        tmux_autoclose_windows = false,
+
+        -- filetypes that you want to prevent from adding to the harpoon list menu.
+        excluded_filetypes = { "harpoon" },
+
+        -- set marks specific to each git branch inside git repository
+        mark_branch = false,
+
+        -- enable tabline with harpoon marks
+        tabline = false,
+        tabline_prefix = "   ",
+        tabline_suffix = "   ",
+      },
+      settings = {
+        save_on_toggle = true,
+        sync_on_ui_close = true,
+      },
+      tabline = true,
+      menu = {
+        width = vim.api.nvim_win_get_width(0) - 20,
+      },
+    },
+    config = function ()
+      local harpoon = require("harpoon")
+
+      vim.keymap.set("n", "<leader>a",
+        function()
+          harpoon:list():add()
+          print("file marked.")
+        end
+      )
+      vim.keymap.set("n", "<leader>clf",
+        function()
+          harpoon:clear_all(harpoon:list())
+          print("file(s) cleared.")
+        end
+      )
+      vim.keymap.set("n", "<leader>h", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+      for i = 1, 5 do
+        vim.keymap.set("n", "<leader>" .. i, function() harpoon:list():select(i) end)
+      end
+    end,
+  },
+  {
     "ellisonleao/gruvbox.nvim",
     priority = 1000 ,
     config = true,
