@@ -17,7 +17,7 @@ require ("config.treesitter")
 require ("config.telescope")
 require ("config.git_conf")
 require ("config.keymaps")
-require ("config.harpoon")
+-- require ("config.harpoon")
 
 ------- -------
 
