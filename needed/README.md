@@ -1,4 +1,6 @@
 
+This files is meant to install the icons that will be showed in the sidebar:
+
 For ImageMagick do the next things:
     -install dependencies executing: 
         "sudo apt install libx11-dev libxext-dev zlib1g-dev libpng-dev libjpeg-dev libfreetype6-dev libxml2-dev"
